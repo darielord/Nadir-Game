@@ -265,7 +265,8 @@ function loop() {
     }
     if (teclas.aleft === true) {
       mirandoDerecha = false;
-      if (fondoX1 < 0 && finalAlcanzado === false) {
+      let habitacionPermiteRegreso = finalAlcanzado === false || enDuchas;
+      if (fondoX1 < 0 && habitacionPermiteRegreso) {
         fondoX1 = fondoX1 + velocidad;
         fondoX2 = fondoX2 + velocidad;
       } else if (nadirX > 0) {

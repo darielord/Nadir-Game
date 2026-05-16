@@ -195,7 +195,11 @@ function loop() {
   }
 
   if (opacidadNegro >= 1 && modoCinematica === 0) {
-    if (!yendoaDuchas) {
+    if (yendoaDuchas) {
+      enDuchas = true;
+      imagenFondoActual = duchas;
+      yendoaDuchas = false;
+    } else if (!yendoaDuchas) {
       ciclosCompletados++;
       ciclosCompletadosFinal++;
     }
@@ -208,11 +212,6 @@ function loop() {
     aclarar = true;
     empezarOscurecer = false;
     sonidoPuerta = false;
-    if (yendoaDuchas) {
-      enDuchas = true;
-
-      yendoaDuchas = false;
-    }
   }
 
   if (aclarar) {
@@ -239,9 +238,18 @@ function loop() {
     opacidadNegro += 0.01;
     sonidoPuertaFinal.play();
   }
-  if (imagenContador === 1 && fondoX1 + 2638 + 2682 <= canvas.width) {
+  if (
+    imagenContador === 1 &&
+    fondoX1 +
+      imagenFondoActual.naturalWidth +
+      imagenFondoActualFinal.naturalWidth <=
+      canvas.width
+  ) {
     finalAlcanzado = true;
-    fondoX1 = canvas.width - 2638 - 2682;
+    fondoX1 =
+      canvas.width -
+      imagenFondoActual.naturalWidth -
+      imagenFondoActualFinal.naturalWidth;
   }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -54,11 +54,7 @@ const AmbienteDuchas = new Audio("DUCHAS.mp3");
 
 const AmbientePabellon10 = new Audio("PABELLON10.mp3");
 
-const AmbientePabellon11 = new Audio("PABELLON11.mp3");
-
 const AmbienteDuchas2 = new Audio("DUCHAS2.mp3");
-
-const sonidoPuertaPabellon11 = new Audio("puertaPabellon11.wav");
 
 // ==========================================
 
@@ -168,18 +164,6 @@ let duchas2Img = false;
 
 let duchas2pt2Img = false;
 
-let HotelImg = false;
-
-let Hotelpt2Img = false;
-
-let Hotelpt3Img = false;
-
-let HotelHabitacion1Img = false;
-
-let HotelHabitacion2Img = false;
-
-let CasaImg = false;
-
 // ==========================================
 
 // 🏃‍♂️ PROPIEDADES Y ANIMACIÓN DE NADIR
@@ -213,8 +197,6 @@ let mirandoDerecha = true; // Controla hacia dónde mira el sprite
 let fondoX1 = 0; // Posición de la imagen líder
 
 let fondoX2 = 2638; // Posición de la imagen seguidora (Clonada)
-
-let fondoX3 = 0;
 
 let imagenContador = 0; // 0 = Loop infinito, 1 = Tramo final activado
 
@@ -260,9 +242,9 @@ let imagenFondoActualFinal; // Guarda la extensión final del pasillo
 
 // ==========================================
 
-let ciclosCompletados = 6; // Cuántas veces has completado el loop de la cárcel
+let ciclosCompletados = 0; // Cuántas veces has completado el loop de la cárcel
 
-let ciclosCompletadosFinal = 6; // Controla qué fondo final de puerta se dibuja
+let ciclosCompletadosFinal = 0; // Controla qué fondo final de puerta se dibuja
 
 let nadirPasoCuchillo = false; // Bandera que sabe si ya pasaste la cinemática del cuchillo
 
@@ -295,26 +277,6 @@ let saliendoDeDuchas = false;
 let saliendoDeDuchas2 = false;
 
 let enPabellon11 = false;
-
-let yendoaHotel = false;
-
-let yendoaCasa = false;
-
-let enCasa = false;
-
-let enHotel = false;
-
-let yendoaHabitacion1 = false;
-
-let yendoaHabitacion2 = false;
-
-let yendoaHabitacion3 = false;
-
-let enHabitacion1 = false;
-
-let enHabitacion2 = false;
-
-let enHabitacion3 = false;
 
 let cinematicaActual = {};
 
@@ -372,42 +334,6 @@ function loop() {
       imagenFondoActual = duchas2;
     } else if (sumadorEscenarioEstatico === 1) {
       imagenFondoActual = duchas2pt2;
-    }
-  } else if (enHotel) {
-    maxPantallasEstaticas = 3;
-
-    if (sumadorEscenarioEstatico === 0) {
-      imagenFondoActual = Hotel;
-    } else if (sumadorEscenarioEstatico === 1) {
-      imagenFondoActual = Hotelpt2;
-    } else if (sumadorEscenarioEstatico === 2) {
-      imagenFondoActual = Hotelpt3;
-    }
-  } else if (enHabitacion1) {
-    maxPantallasEstaticas = 0;
-
-    if (sumadorEscenarioEstatico === 0) {
-      imagenFondoActual = HotelHabitacion1;
-    }
-  } else if (enHabitacion2) {
-    maxPantallasEstaticas = 0;
-
-    if (sumadorEscenarioEstatico === 0) {
-      imagenFondoActual = HotelHabitacion2;
-    }
-  } else if (enHabitacion3) {
-    maxPantallasEstaticas = 0;
-
-    if (sumadorEscenarioEstatico === 0) {
-      imagenFondoActual = HotelHabitacion3;
-    }
-  } else if (enCasa) {
-    maxPantallasEstaticas = 1;
-
-    if (sumadorEscenarioEstatico === 0) {
-      imagenFondoActual = Casa;
-    } else if (sumadorEscenarioEstatico === 1) {
-      imagenFondoActual = CasaCocina;
     }
   }
 
@@ -485,18 +411,6 @@ function loop() {
       AmbienteDuchas2.pause();
 
       AmbienteDuchas2.currentTime = 0;
-    } else if (ciclosCompletados === 10) {
-      AmbientePabellon11.play();
-
-      AmbientePabellon10.pause();
-
-      AmbientePabellon10.currentTime = 0;
-
-      imagenFondoActual = pabellon11;
-
-      imagenFondoPabellon11_2 = pabellon11Puertas;
-
-      imagenFondoPabellon11_3 = pabellon11;
     }
 
     // 2. Selector del Pasillo Extendido (Tramo Final)
@@ -545,34 +459,6 @@ function loop() {
   let inicioPuertaDuchas2 = fondoX1 + imagenFondoActual.naturalWidth + 1044;
 
   let finalPuertaDuchas2 = fondoX1 + imagenFondoActual.naturalWidth + 1790;
-
-  let inicioPuertaHotel = fondoX2 + 336;
-
-  let finalPuertaHotel = fondoX2 + 609;
-
-  let inicioPuertaCasa = fondoX2 + 944;
-
-  let finalPuertaCasa = fondoX2 + 1232;
-
-  let incioPuertaHabitacion1 = (516 / 3534) * canvas.width;
-
-  let finalPuertaHabitacion1 = (777 / 3534) * canvas.width;
-
-  let inicioPuertaHabitacion2 = (1692 / 3534) * canvas.width;
-
-  let finalPuertaHabitacion2 = (1965 / 3534) * canvas.width;
-
-  let incioPuertaHabitacion3 = (2649 / 3534) * canvas.width;
-
-  let finalPuertaHabitacion3 = (2922 / 3534) * canvas.width;
-
-  let inicioHabitacion1TV = (1374 / 1767) * canvas.width;
-
-  let finalHabitacion1TV = (1536 / 1767) * canvas.width;
-
-  let inicioHabitacionSujeto = (1260 / 3534) * canvas.width;
-
-  let finalHabitacionSujeto = (2343 / 3534) * canvas.width;
 
   let agujeroDuchasInicio = (655 / 853) * canvas.width;
 
@@ -658,6 +544,8 @@ function loop() {
       centroNadir > inicioPuertaDuchas2 &&
       centroNadir < finalPuertaDuchas2 &&
       ciclosCompletadosFinal === 9 &&
+      !aclarar &&
+      !empezarOscurecer &&
       teclas.Einteractuar
     ) {
       empezarOscurecer = true;
@@ -665,70 +553,6 @@ function loop() {
       sonidoPuerta = true;
 
       yendoaDuchas2 = true;
-    }
-
-    if (
-      enPabellon11 &&
-      centroNadir > inicioPuertaHotel &&
-      centroNadir < finalPuertaHotel &&
-      ciclosCompletados === 10 &&
-      teclas.Einteractuar
-    ) {
-      empezarOscurecer = true;
-
-      sonidoPuertaPabellon11.play();
-
-      yendoaHotel = true;
-    }
-
-    if (
-      enPabellon11 &&
-      centroNadir > inicioPuertaCasa &&
-      centroNadir < finalPuertaCasa &&
-      ciclosCompletados === 10 &&
-      teclas.Einteractuar
-    ) {
-      empezarOscurecer = true;
-
-      sonidoPuertaPabellon11.play();
-
-      yendoaCasa = true;
-    }
-
-    if (
-      enHotel &&
-      centroNadir > incioPuertaHabitacion1 &&
-      centroNadir < finalPuertaHabitacion1 &&
-      sumadorEscenarioEstatico === 1 &&
-      teclas.Einteractuar
-    ) {
-      empezarOscurecer = true;
-
-      yendoaHabitacion1 = true;
-    }
-
-    if (
-      enHotel &&
-      centroNadir > inicioPuertaHabitacion2 &&
-      centroNadir < finalPuertaHabitacion2 &&
-      sumadorEscenarioEstatico === 1 &&
-      teclas.Einteractuar
-    ) {
-      empezarOscurecer = true;
-
-      yendoaHabitacion2 = true;
-    }
-
-    if (
-      enHotel &&
-      centroNadir > inicioPuertaHabitacion3 &&
-      centroNadir < finalPuertaHabitacion3 &&
-      sumadorEscenarioEstatico === 1 &&
-      teclas.Einteractuar
-    ) {
-      empezarOscurecer = true;
-
-      yendoaHabitacion3;
     }
   }
 
@@ -752,6 +576,7 @@ function loop() {
     sumadorEscenarioEstatico === 0 &&
     centroNadir < 150 &&
     !empezarOscurecer &&
+    !aclarar &&
     teclas.Einteractuar
   ) {
     empezarOscurecer = true;
@@ -809,52 +634,6 @@ function loop() {
     estado = "idle";
   }
 
-  if (
-    enHabitacion1 &&
-    centroNadir > inicioHabitacion1TV &&
-    centroNadir < finalHabitacion1TV &&
-    sumadorEscenarioEstatico === 0 &&
-    teclas.Einteractuar &&
-    !eventoTVCompletado
-  ) {
-    cinematicaActual.imgCinematica = ImagenTVHabitacion1;
-
-    cinematicaActual.tiempoCinematica = 150;
-
-    cinematicaActual.idCinematica = "TV";
-
-    modoCinematica = 1;
-
-    velocidad = 0;
-
-    sonidoPasos.pause();
-
-    estado = "idle";
-  }
-
-  if (
-    enHabitacion2 &&
-    centroNadir > inicioHabitacionSujeto &&
-    centroNadir < finalHabitacionSujeto &&
-    sumadorEscenarioEstatico === 0 &&
-    teclas.Einteractuar &&
-    !eventoSujetoCompletado
-  ) {
-    cinematicaActual.imgCinematica = ImagenSujetoHabitacion2;
-
-    cinematicaActual.tiempoCinematica = 150;
-
-    cinematicaActual.idCinematica = "SUJETO";
-
-    modoCinematica = 1;
-
-    velocidad = 0;
-
-    sonidoPasos.pause();
-
-    estado = "idle";
-  }
-
   // 🎞️ MÁQUINA DE ESTADOS: Controla el flujo visual de la cinemática
 
   switch (modoCinematica) {
@@ -899,10 +678,6 @@ function loop() {
           eventoDuchasCompletado = true;
         } else if (cinematicaActual.idCinematica === "AGUJERO2") {
           eventoDuchas2Completado = true;
-        } else if (cinematicaActual.idCinematica === "TV") {
-          eventoTVCompletado = true;
-        } else if (cinematicaActual.idCinematica === "SUJETO") {
-          eventoSujetoCompletado = true;
         }
 
         modoCinematica = 5; // Pasa al aclarado final del gameplay
@@ -1009,132 +784,18 @@ function loop() {
       imagenContador = 0;
 
       sumadorEscenarioEstatico = 0;
-    } else if (yendoaHotel) {
-      enHotel = true;
-
-      yendoaHotel = false;
-
-      escenarioEstatico = true;
-
-      nadirX = 100;
-
-      fondoX1 = 0;
-
-      finalAlcanzado = false;
-
-      imagenContador = 0;
-
-      enPabellon11 = false;
-
-      sumadorEscenarioEstatico = 0;
-    } else if (yendoaHabitacion1) {
-      enHabitacion1 = true;
-
-      yendoaHabitacion1 = false;
-
-      escenarioEstatico = true;
-
-      nadirX = 100;
-
-      fondoX1 = 0;
-
-      finalAlcanzado = false;
-
-      imagenContador = 0;
-
-      sumadorEscenarioEstatico = 0;
-
-      enHotel = false;
-    } else if (yendoaHabitacion2) {
-      enHabitacion2 = true;
-
-      yendoaHabitacion2 = false;
-
-      escenarioEstatico = true;
-
-      nadirX = 100;
-
-      fondoX1 = 0;
-
-      finalAlcanzado = false;
-
-      imagenContador = 0;
-
-      sumadorEscenarioEstatico = 0;
-
-      enHotel = false;
-    } else if (yendoaHabitacion3) {
-      enHabitacion3 = true;
-
-      yendoaHabitacion3 = false;
-
-      escenarioEstatico = true;
-
-      nadirX = 100;
-
-      fondoX1 = 0;
-
-      finalAlcanzado = false;
-
-      imagenContador = 0;
-
-      sumadorEscenarioEstatico = 0;
-
-      enHotel = false;
-    } else if (yendoaCasa) {
-      enCasa = true;
-
-      yendoaCasa = false;
-
-      escenarioEstatico = true;
-
-      nadirX = 100;
-
-      fondoX1 = 0;
-
-      finalAlcanzado = false;
-
-      imagenContador = 0;
-
-      sumadorEscenarioEstatico = 0;
-
-      enPabellon11 = false;
     } else {
       ciclosCompletados++;
 
       ciclosCompletadosFinal++;
 
-      if (ciclosCompletados === 10) {
-        enPabellon11 = true;
+      nadirX = 100;
 
-        nadirX = 100;
+      fondoX1 = 0;
+      fondoX2 = imagenFondoActual.naturalWidth;
+      finalAlcanzado = false;
 
-        fondoX1 = 0;
-
-        fondoX2 = 2048;
-
-        fondoX3 = 4096;
-
-        finalAlcanzado = false;
-
-        imagenContador = 0;
-
-        imagenFondoActual = pabellon11;
-
-        imagenFondoPabellon11_2 = pabellon11Puertas;
-
-        imagenFondoPabellon11_3 = pabellon11;
-      } else {
-        nadirX = 100;
-
-        fondoX1 = 0;
-
-        fondoX2 = imagenFondoActual.naturalWidth;
-
-        finalAlcanzado = false;
-
-        imagenContador = 0;
-      }
+      imagenContador = 0;
     }
 
     aclarar = true;
@@ -1271,8 +932,6 @@ function loop() {
           fondoX1 = fondoX1 - velocidad;
 
           fondoX2 = fondoX2 - velocidad;
-
-          fondoX3 = fondoX3 - velocidad;
         }
       }
     }
@@ -1291,8 +950,6 @@ function loop() {
           fondoX1 = fondoX1 + velocidad;
 
           fondoX2 = fondoX2 + velocidad;
-
-          fondoX3 = fondoX3 + velocidad;
         }
 
         // Si el escenario llegó al tope izquierdo, se mueve físicamente Nadir hacia la izquierda
@@ -1340,70 +997,43 @@ function loop() {
       sonidoPasos.currentTime = 0;
     }
   }
+  // 🌀 RECIRCULACIÓN INFINITA DE FONDOS (EL EFECTO BUCLE)
 
-  if (enPabellon11) {
-    if (fondoX1 <= -2048) {
-      fondoX1 = fondoX1 + 6144;
+  // Revisa si una de las imágenes se salió por completo de la pantalla para reciclarla detrás de la otra
+
+  // Si el Fondo 1 se esconde por la izquierda...
+
+  if (fondoX1 <= -imagenFondoActual.naturalWidth) {
+    if (imagenContador < 1) {
+      // Solo si el bucle infinito sigue activo
+
+      imagenContador++;
+
+      fondoX1 = fondoX2 + imagenFondoActual.naturalWidth; // Se teletransporta al final del Fondo 2
     }
+  }
 
-    if (fondoX2 <= -2048) {
-      fondoX2 = fondoX2 + 6144;
+  // Si el Fondo 2 se esconde por la izquierda...
+
+  if (fondoX2 <= -imagenFondoActual.naturalWidth) {
+    if (imagenContador < 1) {
+      fondoX2 = fondoX1 + imagenFondoActual.naturalWidth; // Se teletransporta al final del Fondo 1
     }
+  }
 
-    if (fondoX3 <= -2048) {
-      fondoX3 = fondoX3 + 6144;
+  // Si el Fondo 1 se sale por la derecha (Caminando hacia atrás)...
+
+  if (fondoX1 > imagenFondoActual.naturalWidth) {
+    if (imagenContador < 1) {
+      fondoX1 = fondoX2 - imagenFondoActual.naturalWidth; // Se reposiciona al inicio del Fondo 2
     }
+  }
 
-    if (fondoX1 >= 4096) {
-      fondoX1 = fondoX1 - 6144;
-    }
+  // Si el Fondo 2 se sale por la derecha (Caminando hacia atrás)...
 
-    if (fondoX2 >= 4096) {
-      fondoX2 = fondoX2 - 6144;
-    }
-
-    if (fondoX3 >= 4096) {
-      fondoX3 = fondoX3 - 6144;
-    }
-  } else {
-    // 🌀 RECIRCULACIÓN INFINITA DE FONDOS (EL EFECTO BUCLE)
-
-    // Revisa si una de las imágenes se salió por completo de la pantalla para reciclarla detrás de la otra
-
-    // Si el Fondo 1 se esconde por la izquierda...
-
-    if (fondoX1 <= -imagenFondoActual.naturalWidth) {
-      if (imagenContador < 1) {
-        // Solo si el bucle infinito sigue activo
-
-        imagenContador++;
-
-        fondoX1 = fondoX2 + imagenFondoActual.naturalWidth; // Se teletransporta al final del Fondo 2
-      }
-    }
-
-    // Si el Fondo 2 se esconde por la izquierda...
-
-    if (fondoX2 <= -imagenFondoActual.naturalWidth) {
-      if (imagenContador < 1) {
-        fondoX2 = fondoX1 + imagenFondoActual.naturalWidth; // Se teletransporta al final del Fondo 1
-      }
-    }
-
-    // Si el Fondo 1 se sale por la derecha (Caminando hacia atrás)...
-
-    if (fondoX1 > imagenFondoActual.naturalWidth) {
-      if (imagenContador < 1) {
-        fondoX1 = fondoX2 - imagenFondoActual.naturalWidth; // Se reposiciona al inicio del Fondo 2
-      }
-    }
-
-    // Si el Fondo 2 se sale por la derecha (Caminando hacia atrás)...
-
-    if (fondoX2 > imagenFondoActual.naturalWidth) {
-      if (imagenContador < 1) {
-        fondoX2 = fondoX1 - imagenFondoActual.naturalWidth; // Se reposiciona al inicio del Fondo 1
-      }
+  if (fondoX2 > imagenFondoActual.naturalWidth) {
+    if (imagenContador < 1) {
+      fondoX2 = fondoX1 - imagenFondoActual.naturalWidth; // Se reposiciona al inicio del Fondo 1
     }
   }
 
@@ -1476,38 +1106,6 @@ puertaFinalCuchillo.src = "PASILLOFINALPUERTACUCHILLO.png";
 const puertaFinal7 = new Image();
 
 puertaFinal7.src = "puertafinalducha.png";
-
-const Hotel = new Image();
-
-Hotel.src = "HOTEL.png";
-
-const Hotelpt2 = new Image();
-
-Hotelpt2.src = "HOTELPT2.png";
-
-const Hotelpt3 = new Image();
-
-Hotelpt3.src = "HOTELPT3.png";
-
-const HotelHabitacion1 = new Image();
-
-HotelHabitacion1.src = "HOTELHABITACION1.png";
-
-const HotelHabitacion2 = new Image();
-
-HotelHabitacion2.src = "HABITACION2SUJETO.png";
-
-const Casa = new Image();
-
-Casa.src = "Casa.png";
-
-const pabellon11 = new Image();
-
-pabellon11.src = "PABELLON11.png";
-
-const pabellon11Puertas = new Image();
-
-pabellon11Puertas.src = "PABELLON11PUERTAS.png";
 
 const pabellon10 = new Image();
 
@@ -1603,21 +1201,27 @@ function dibujarTodo() {
   if (escenarioEstatico) {
     ctx.drawImage(imagenFondoActual, 0, 0, canvas.width, canvas.height);
   } else {
-    if (enPabellon11) {
+    // 🧱 2. RENDERIZADO DE ESCENARIOS (CAPA TRASERA)
+
+    // Dibuja el primer pasillo líder
+
+    ctx.drawImage(
+      imagenFondoActual,
+
+      fondoX1,
+
+      0,
+
+      imagenFondoActual.naturalWidth,
+
+      canvas.height,
+    );
+
+    // Dibuja el segundo pasillo clonado en paralelo si está dentro del monitor
+
+    if (fondoX2 > -imagenFondoActual.naturalWidth && fondoX2 < canvas.width) {
       ctx.drawImage(
         imagenFondoActual,
-
-        fondoX1,
-
-        0,
-
-        imagenFondoActual.naturalWidth,
-
-        canvas.height,
-      );
-
-      ctx.drawImage(
-        imagenFondoPabellon11_2,
 
         fondoX2,
 
@@ -1627,66 +1231,22 @@ function dibujarTodo() {
 
         canvas.height,
       );
+    }
 
+    // Si rompimos el bucle, engancha el pasillo final extendido justo detrás del primero
+
+    if (imagenContador >= 1) {
       ctx.drawImage(
-        imagenFondoPabellon11_3,
+        imagenFondoActualFinal,
 
-        fondoX3,
+        fondoX1 + imagenFondoActual.naturalWidth,
 
         0,
 
-        imagenFondoActual.naturalWidth,
+        2682,
 
         canvas.height,
       );
-    } else {
-      // 🧱 2. RENDERIZADO DE ESCENARIOS (CAPA TRASERA)
-
-      // Dibuja el primer pasillo líder
-
-      ctx.drawImage(
-        imagenFondoActual,
-
-        fondoX1,
-
-        0,
-
-        imagenFondoActual.naturalWidth,
-
-        canvas.height,
-      );
-
-      // Dibuja el segundo pasillo clonado en paralelo si está dentro del monitor
-
-      if (fondoX2 > -imagenFondoActual.naturalWidth && fondoX2 < canvas.width) {
-        ctx.drawImage(
-          imagenFondoActual,
-
-          fondoX2,
-
-          0,
-
-          imagenFondoActual.naturalWidth,
-
-          canvas.height,
-        );
-      }
-
-      // Si rompimos el bucle, engancha el pasillo final extendido justo detrás del primero
-
-      if (imagenContador >= 1) {
-        ctx.drawImage(
-          imagenFondoActualFinal,
-
-          fondoX1 + imagenFondoActual.naturalWidth,
-
-          0,
-
-          2682,
-
-          canvas.height,
-        );
-      }
     }
   }
 
@@ -1800,16 +1360,8 @@ carcel.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -1840,16 +1392,8 @@ idle.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -1880,16 +1424,8 @@ caminarsheet.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -1920,12 +1456,8 @@ ataqueSheet.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -1956,16 +1488,8 @@ carcelFinalPabellon.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -1996,16 +1520,8 @@ pabellon4.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2036,16 +1552,8 @@ pabellon5.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   )
     if (!animando) {
       animando = true;
@@ -2075,16 +1583,8 @@ puertaFinal7.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2115,16 +1615,8 @@ puertaFinalCuchillo.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2155,16 +1647,8 @@ duchas.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2195,16 +1679,8 @@ pabellon8.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2235,16 +1711,8 @@ duchaspt2.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2275,16 +1743,8 @@ pabellon9.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2315,16 +1775,8 @@ carcelRojaFinal.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2355,16 +1807,8 @@ carcelRojaFinal2.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2395,16 +1839,8 @@ pabellon10.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2435,96 +1871,8 @@ pabellon10Final.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-pabellon11.onload = () => {
-  pabellon11Img = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-pabellon11Puertas.onload = () => {
-  pabellon11PuertasImg = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2555,16 +1903,8 @@ duchas2.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;
@@ -2595,256 +1935,8 @@ duchas2pt2.onload = () => {
     carcelRojaFinal2Img &&
     carcelPabellon10Img &&
     carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
     duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-Hotel.onload = () => {
-  HotelImg = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-Hotelpt2.onload = () => {
-  Hotelpt2Img = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-Hotelpt3.onload = () => {
-  Hotelpt3Img = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-HotelHabitacion1.onload = () => {
-  HotelHabitacion1Img = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-HotelHabitacion2.onload = () => {
-  HotelHabitacion2Img = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
-  ) {
-    if (!animando) {
-      animando = true;
-
-      loop();
-    }
-  }
-};
-
-Casa.onload = () => {
-  CasaImg = true;
-
-  if (
-    carcelImg &&
-    nadirImg &&
-    caminataImg &&
-    ataqueImg &&
-    carcelFinalPabellonimg &&
-    pabellon4Img &&
-    pabellon5Img &&
-    puertaFinal7Img &&
-    puertaFinalCuchilloImg &&
-    duchasImg &&
-    pabellon8Img &&
-    duchaspt2Img &&
-    pabellon9Img &&
-    carcelRojaFinalImg &&
-    carcelRojaFinal2Img &&
-    carcelPabellon10Img &&
-    carcelPabellon10FinalImg &&
-    pabellon11Img &&
-    pabellon11PuertasImg &&
-    duchas2Img &&
-    duchas2pt2Img &&
-    HotelImg &&
-    Hotelpt2Img &&
-    Hotelpt3Img &&
-    HotelHabitacion1Img &&
-    HotelHabitacion2Img &&
-    CasaImg
+    duchas2pt2Img
   ) {
     if (!animando) {
       animando = true;

@@ -784,6 +784,13 @@ function loop() {
       imagenContador = 0;
 
       sumadorEscenarioEstatico = 0;
+    } else if (ciclosCompletadosFinal === 9) {
+      cinematicaActual.imgCinematica = NadirFinal;
+
+      cinematicaActual.tiempoCinematica = Infinity;
+
+      cinematicaActual.idCinematica = "NadirFinal";
+      modoCinematica = 3;
     } else {
       ciclosCompletados++;
 
@@ -831,6 +838,7 @@ function loop() {
         empezarOscurecer = true;
 
         sonidoPuerta = true;
+        sonidoPuertaFinal.play();
       } else {
         if (puertaCerrada.paused) {
           puertaCerrada.currentTime = 0;
@@ -1158,6 +1166,9 @@ caminarsheet.src = "CAMINARSHEET.png";
 const ataqueSheet = new Image();
 
 ataqueSheet.src = "ATAQUEREAL.png";
+
+const NadirFinal = new Image();
+NadirFinal.src = "NADIRPABELLON11.png";
 
 // ==========================================
 

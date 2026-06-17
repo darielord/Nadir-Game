@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 
 function App() {
+  const [juegoActivo, setJuegoActivo] = useState(false);
   useEffect(() => {
     // ==========================================
     // 🎥 CONFIGURACIÓN DEL LIENZO (CANVAS)
@@ -366,6 +367,11 @@ function App() {
     let idAnimacion;
 
     function loop() {
+      if (!juegoActivo) {
+        requestAnimationFrame(loop);
+        return;
+      }
+
       // 🗺️ MÁQUINA DE ESTADOS DE ESCENARIOS (MUNDOS)
       if (enDuchas) {
         maxPantallasEstaticas = 1;
@@ -882,11 +888,51 @@ function App() {
       AmbientePabellon10.pause();
       AmbienteDuchas2.pause();
     };
-  }, []);
+  }, [juegoActivo]);
 
   return (
-    <div className="game-container">
-      <canvas id="gameCanvas"></canvas>
+    <div className="contenedor-principal-juego">
+      <div className="game-container">
+        <canvas id="gameCanvas"></canvas>
+        {!juegoActivo && (
+          <div
+            className="capa-menu-flotante"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.7)",
+            }}
+          >
+            {/*Caja contenedora con el boton de Start */}
+            <div className="menu-inicio">
+              <h1>NADIR</h1>
+              <button
+                onClick={() => setJuegoActivo(true)}
+                style={{
+                  backgroundColor: "#0A0A0A",
+
+                  width: "150px",
+                  height: "70px",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  border: "none",
+                  borderRadius: "20px",
+                  color: "white",
+                }}
+              >
+                Start
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

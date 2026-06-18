@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./index.css";
 
 function App() {
+  const AmbientePrision = useRef(new Audio("PRISIONAMBIENTE.flac"));
+
   const [juegoActivo, setJuegoActivo] = useState(false);
   useEffect(() => {
     // ==========================================
@@ -21,9 +23,9 @@ function App() {
     const sonidoPuertaFinal = new Audio("PRISONDOOR.mp3");
     const sonidoPasos = new Audio("Pasito.mp3");
     sonidoPasos.loop = true; // Hace que los pasos suenen infinitos mientras camina
+    AmbientePrision.current.play();
 
-    const AmbientePrision = new Audio("PRISIONAMBIENTE.flac");
-    AmbientePrision.loop = true;
+    AmbientePrision.current.loop = true;
     let AmbientePrisionInterruptor = false;
 
     const AmbientePabellon4 = new Audio("PABELLON4.wav");
@@ -53,10 +55,6 @@ function App() {
     };
 
     const manejarKeyDown = (e) => {
-      if (e.key === "a" || (e.key === "d" && !AmbientePrisionInterruptor)) {
-        AmbientePrision.play();
-        AmbientePrisionInterruptor = true;
-      }
       if (e.key === "a") teclas.aleft = true;
       if (e.key === "d") teclas.dright = true;
       if (e.key === "e") teclas.Einteractuar = true;
@@ -879,7 +877,9 @@ function App() {
       window.removeEventListener("mousedown", manejarMouseDown);
       window.removeEventListener("mouseup", manejarMouseUp);
       sonidoPasos.pause();
-      AmbientePrision.pause();
+      if (!juegoActivo) {
+        AmbientePrision.current.pause();
+      }
       AmbientePabellon4.pause();
       AmbientePabellon5.pause();
       AmbientecarcelRoja.pause();
@@ -891,48 +891,48 @@ function App() {
   }, [juegoActivo]);
 
   return (
-    <div className="contenedor-principal-juego">
-      <div className="game-container">
-        <canvas id="gameCanvas"></canvas>
-        {!juegoActivo && (
-          <div
-            className="capa-menu-flotante"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "rgba(0,0,0,0.7)",
-            }}
-          >
-            {/*Caja contenedora con el boton de Start */}
-            <div className="menu-inicio">
-              <h1>NADIR</h1>
-              <button
-                onClick={() => setJuegoActivo(true)}
-                style={{
-                  backgroundColor: "#0A0A0A",
+    <div className="game-container">
+      <canvas id="gameCanvas"></canvas>
+      {!juegoActivo && (
+        <div
+          className="capa-menu-flotante"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.7)",
+          }}
+        >
+          {/*Caja contenedora con el boton de Start */}
+          <div className="menu-inicio">
+            <h1>NADIR</h1>
+            <button
+              onClick={() => {
+                setJuegoActivo(true);
+              }}
+              style={{
+                backgroundColor: "#0A0A0A",
 
-                  width: "150px",
-                  height: "70px",
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  border: "none",
-                  borderRadius: "20px",
-                  color: "white",
-                }}
-              >
-                Start
-              </button>
-            </div>
+                width: "150px",
+                height: "70px",
+                fontSize: "30px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                border: "none",
+                borderRadius: "20px",
+                color: "white",
+              }}
+            >
+              Start
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

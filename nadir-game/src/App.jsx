@@ -23,7 +23,10 @@ function App() {
     const sonidoPuertaFinal = new Audio("PRISONDOOR.mp3");
     const sonidoPasos = new Audio("Pasito.mp3");
     sonidoPasos.loop = true; // Hace que los pasos suenen infinitos mientras camina
-    AmbientePrision.current.play();
+
+    if (juegoActivo) {
+      AmbientePrision.current.play();
+    }
 
     AmbientePrision.current.loop = true;
     let AmbientePrisionInterruptor = false;
@@ -67,6 +70,8 @@ function App() {
     };
 
     const manejarMouseDown = (e) => {
+      if (!nadirPasoCuchillo) return;
+
       if (e.button === 0) {
         teclas.ataque = true;
         bloqueoMovimiento = true; // El freno de mano que bloquea el movimiento
@@ -74,6 +79,8 @@ function App() {
     };
 
     const manejarMouseUp = (e) => {
+      if (!nadirPasoCuchillo) return;
+
       if (e.button === 0) {
         teclas.ataque = false;
       }
@@ -154,8 +161,8 @@ function App() {
     // ==========================================
     // 🎬 PROGRESO DE CICLOS Y CINEMÁTICAS
     // ==========================================
-    let ciclosCompletados = 0; // Cuántas veces has completado el loop de la cárcel
-    let ciclosCompletadosFinal = 0; // Controla qué fondo final de puerta se dibuja
+    let ciclosCompletados = 9; // Cuántas veces has completado el loop de la cárcel
+    let ciclosCompletadosFinal = 9; // Controla qué fondo final de puerta se dibuja
     let nadirPasoCuchillo = false; // Bandera que sabe si ya pasaste la cinemática del cuchillo
     let modoCinematica = 0; // 0 = Jugando, 1-5 = Fases del fundido en negro
     let contadorCinematica = 0; // Temporizador para aguantar la pantalla negra
@@ -195,7 +202,7 @@ function App() {
     const duchas2pt2 = new Image();
     duchas2pt2.src = "DUCHAS2PT2IMAGE.png";
     const ImagenAgujeroDuchas = new Image();
-    ImagenAgujeroDuchas.src = "aguJeroDuchas.png";
+    ImagenAgujeroDuchas.src = "AgujeroDuchas.png";
     const ImagenTVHabitacion1 = new Image();
     ImagenTVHabitacion1.src = "HABITACION1TV.png";
     const ImagenSujetoHabitacion2 = new Image();
@@ -223,7 +230,7 @@ function App() {
     const carcelRojaFinal = new Image();
     carcelRojaFinal.src = "carcelrojaFinal.png";
     const carcelRojaFinal2 = new Image();
-    carcelRojaFinal2.src = "carcelRojaFinal2.png";
+    carcelRojaFinal2.src = "carcelrojaFinal2.png";
     const pabellon10Final = new Image();
     pabellon10Final.src = "carcelPabellon10Final.png";
     const idle = new Image();
@@ -374,7 +381,7 @@ function App() {
       if (enDuchas) {
         maxPantallasEstaticas = 1;
         AmbienteDuchas.play();
-        AmbientePrision.pause();
+        AmbientePrision.current.pause();
         if (sumadorEscenarioEstatico === 0) {
           imagenFondoActual = duchas;
         } else if (sumadorEscenarioEstatico === 1) {
@@ -383,7 +390,7 @@ function App() {
       } else if (enDuchas2) {
         maxPantallasEstaticas = 1;
         AmbienteDuchas2.play();
-        AmbientePrision.pause();
+        AmbientePrision.current.pause();
         AmbientePabellon10.pause();
         AmbientePabellon10.currentTime = 0;
         if (sumadorEscenarioEstatico === 0) {
@@ -397,20 +404,20 @@ function App() {
         } else if (ciclosCompletados === 3) {
           imagenFondoActual = pabellon4;
           AmbientePabellon4.play();
-          AmbientePrision.pause();
+          AmbientePrision.current.pause();
           AmbientePrision.currentTime = 0;
         } else if (ciclosCompletados === 4 || ciclosCompletados === 5) {
           imagenFondoActual = pabellon5;
           AmbientePabellon5.play();
           AmbientePabellon4.pause();
           AmbientePabellon4.currentTime = 0;
-          AmbientePrision.pause();
+          AmbientePrision.current.pause();
           AmbientePrision.currentTime = 0;
         } else if (ciclosCompletados === 6) {
           AmbienteDuchas.pause();
           AmbienteDuchas.currentTime = 0;
           imagenFondoActual = pabellon5;
-          AmbientePrision.pause();
+          AmbientePrision.current.pause();
           AmbientePrision.currentTime = 0;
           AmbientePabellon5.pause();
           AmbientePabellon5.currentTime = 0;
@@ -427,7 +434,7 @@ function App() {
           AmbientePabellon10.play();
           AmbientecarcelRoja2.pause();
           AmbientecarcelRoja2.currentTime = 0;
-          AmbientePrision.pause();
+          AmbientePrision.current.pause();
           AmbientePrision.currentTime = 0;
           AmbienteDuchas2.pause();
           AmbienteDuchas2.currentTime = 0;
@@ -495,7 +502,6 @@ function App() {
             yendoaDuchas = true;
           } else {
             if (puertaDuchasCerrada.paused) {
-              pucht = 0;
               puertaDuchasCerrada.currentTime = 0;
               puertaDuchasCerrada.play();
             }
